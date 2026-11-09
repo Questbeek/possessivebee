@@ -152,7 +152,7 @@ public class AstralProjectionCamera extends AbstractCamera {
                 Identifier.fromNamespaceAndPath(
                         PossessiveModClient.MOD_ID, "astral"
                 ),
-                LevelTargetBundle.SORTING_TARGETS
+                LevelTargetBundle.MAIN_TARGETS
         );
         if (astralShader == null) {
             return;

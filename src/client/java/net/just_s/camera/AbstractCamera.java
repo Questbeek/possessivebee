@@ -13,6 +13,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.CommonListenerCookie;
 import net.minecraft.client.multiplayer.LevelLoadTracker;
+import net.minecraft.client.player.ItemActivation;
 import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.PostChain;
@@ -94,7 +95,7 @@ public abstract class AbstractCamera extends LocalPlayer {
     }
 
     public AbstractCamera(Minecraft client, int id) {
-        super(client, client.level, NETWORK_HANDLER, client.player.getStats(), client.player.getRecipeBook(), Input.EMPTY, false, client.player.chatAbilities());
+        super(client, client.level, NETWORK_HANDLER, client.player.getStats(), client.player.getRecipeBook(), Input.EMPTY, false, client.player.chatAbilities(), new ItemActivation());
 
         // Not to interfere with real entities in world. Should be negative.
         setId(id);

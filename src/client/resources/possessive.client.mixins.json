@@ -9,6 +9,7 @@
     "GameRendererMixin",
     "GuiMixin",
     "GuiScreenMixin",
+    "FirstPersonHandsAndItemsMixin",
     "FirstPersonHandsAndItemsRendererMixin",
     "LevelExtractorMixin",
     "LevelRendererMixin",
