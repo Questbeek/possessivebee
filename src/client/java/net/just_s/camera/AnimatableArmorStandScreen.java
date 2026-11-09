@@ -17,7 +17,7 @@ public class AnimatableArmorStandScreen extends ArmorStandScreen {
     private Button syncButton;
 
     public AnimatableArmorStandScreen(ArmorStandCamera armorStandCamera) {
-        super(armorStandCamera.getPossessed(), List.of());
+        super(armorStandCamera.getPossessed(), List.of(), 0.0625, 10.0);
         camera = armorStandCamera;
     }
 

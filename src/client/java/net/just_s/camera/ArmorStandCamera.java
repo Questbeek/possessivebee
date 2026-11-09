@@ -3,7 +3,7 @@ package net.just_s.camera;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mrbysco.armorposer.Reference;
 import com.mrbysco.armorposer.data.SyncData;
-import com.mrbysco.armorposer.packets.ArmorStandSyncPayload;
+import com.mrbysco.armorposer.packets.v1.ArmorStandSyncPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.just_s.PossessiveModClient;
 import net.just_s.mixin.client.LocalPlayerAccessor;
