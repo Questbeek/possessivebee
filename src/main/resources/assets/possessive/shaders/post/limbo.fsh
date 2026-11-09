@@ -5,9 +5,9 @@ uniform sampler2D MainDepthSampler;
 
 #include <minecraft:globals.glsl>
 
-layout(location = 0) in vec2 texCoord;
+in vec2 texCoord;
 
-layout(location = 0) out vec4 fragColor;
+out vec4 fragColor;
 
 float noise(vec2 coord) {
     return fract( sin(coord.x*111.+ coord.y*532.) * 2556. * cos(GameTime));
