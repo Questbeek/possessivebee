@@ -1,14 +1,13 @@
-#version 150
+#version 330
 
 uniform sampler2D MainSampler;
 uniform sampler2D MainDepthSampler;
 
-#moj_import <minecraft:globals.glsl>
+#include <minecraft:globals.glsl>
 
-in vec2 texCoord;
-in vec2 oneTexel;
+layout(location = 0) in vec2 texCoord;
 
-out vec4 fragColor;
+layout(location = 0) out vec4 fragColor;
 
 float noise(vec2 coord) {
     return fract( sin(coord.x*111.+ coord.y*532.) * 2556. * cos(GameTime));
@@ -39,13 +38,13 @@ vec3 perlin(vec2 coord) {
     color += smoothNoise(coord * 32.) * .125;
     color += smoothNoise(coord * 64.) * .0625;
 
-    color /= 2;
-    return clamp(color + clamp(cos(mod(GameTime * 20, 1.) * 3.14 * 2), -0.3, 0.3), 0, 1);
+    color /= 2.0;
+    return clamp(color + clamp(cos(mod(GameTime * 20.0, 1.0) * 3.14 * 2.0), -0.3, 0.3), 0.0, 1.0);
 }
 
 float greeneness(vec3 color) {
     float MaxValue = max(color.r, max(color.g, color.b));
-    if (MaxValue == 0) return 0;
+    if (MaxValue == 0.0) return 0.0;
     return color.g / MaxValue;
 }
 
@@ -62,13 +61,13 @@ void main() {
     float GrayScaledColorValue = dot(InTexel.rgb, Monochrome);
     vec3 GrayScaledColor = vec3(GrayScaledColorValue, GrayScaledColorValue, GrayScaledColorValue);//vec3(RedValue, GreenValue, BlueValue);
 
-    float Intencity = pow(greeneness(InTexel.rgb), 3);
+    float Intencity = pow(greeneness(InTexel.rgb), 3.0);
     vec3 ImportantColor = mix(InTexel.rgb, GrayScaledColor.rgb, Intencity);
 
     vec3 PerlinColor = perlin(texCoord);
 
-    vec3 DarkenDepthMap = vec3(pow(vec3(1. - linearizeDepth(texCoord, 0.05, 32)).r, 2));
-    vec3 DarkenColor = mix(vec3(0), ImportantColor, DarkenDepthMap.r);
+    vec3 DarkenDepthMap = vec3(pow(1.0 - linearizeDepth(texCoord, 0.05, 32.0), 2.0));
+    vec3 DarkenColor = mix(vec3(0.0), ImportantColor, DarkenDepthMap.r);
 
     vec3 FoggyColor = PerlinColor;
     float treshold = 0.0005;
