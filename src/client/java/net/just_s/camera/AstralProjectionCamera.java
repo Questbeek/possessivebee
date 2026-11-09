@@ -84,7 +84,10 @@ public class AstralProjectionCamera extends AbstractCamera {
 
     @Override
     public void aiStep() {
+        // Player#tick resets noPhysics every tick, so set it right before movement: fly through blocks.
+        this.noPhysics = true;
         super.aiStep();
+        this.noPhysics = true;
         getAbilities().flying = true;
         setOnGround(false);
     }

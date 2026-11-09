@@ -66,8 +66,9 @@ public class PossessiveKeyMappings {
 
         boolean isAstral = PossessiveModClient.cameraHandler.getCamera() instanceof AstralProjectionCamera;
         while (possessKeyMapping.consumeClick()) {
-            if (client.options.keyShift.isDown()) {
-                if (isAstral) {
+            if (!isAstral) {
+                // Already possessing something (e.g. an armor stand): nothing to do
+                if (PossessiveModClient.cameraHandler.isEnabled() && !client.options.keyShift.isDown()) {
                     return;
                 }
                 // Forbid astral projecting while in the Freecam
@@ -83,9 +84,6 @@ public class PossessiveKeyMappings {
                         SoundEvents.APPLY_EFFECT_TRIAL_OMEN, 1f, 1f,
                         "possessive.message.vessel_empty"
                 );
-                return;
-            }
-            if (!isAstral) {
                 return;
             }
 
