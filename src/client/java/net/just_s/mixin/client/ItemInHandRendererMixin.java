@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.just_s.PossessiveModClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(ItemInHandRenderer.class)
-public class ItemInHandRendererMixin {
+@Mixin(FirstPersonHandsAndItemsRenderer.class)
+public class FirstPersonHandsAndItemsRendererMixin {
 
     @Unique
     private float possessive$tickDelta;
@@ -30,7 +30,7 @@ public class ItemInHandRendererMixin {
                     ordinal = 0
             )
     )
-    private void possessive$replaceBooleansForRenderingHands(float f, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, LocalPlayer localPlayer, int i, CallbackInfo ci, @Local LocalRef<ItemInHandRenderer.HandRenderSelection> localRef){
+    private void possessive$replaceBooleansForRenderingHands(float f, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, LocalPlayer localPlayer, int i, CallbackInfo ci, @Local LocalRef<FirstPersonHandsAndItemsRenderer.HandRenderSelection> localRef){
         // if mod not in use then just skip it altogether
         if (!PossessiveModClient.cameraHandler.isEnabled()) {
             return;
@@ -40,11 +40,11 @@ public class ItemInHandRendererMixin {
         boolean finalShouldRenderOffHand = PossessiveModClient.cameraHandler.getCamera().shouldRenderItemInOffHand(localRef.get().renderOffHand);
 
         if (finalShouldRenderMainHand && finalShouldRenderOffHand) {
-            localRef.set(ItemInHandRenderer.HandRenderSelection.RENDER_BOTH_HANDS);
+            localRef.set(FirstPersonHandsAndItemsRenderer.HandRenderSelection.RENDER_BOTH_HANDS);
         } else if (finalShouldRenderMainHand) {
-            localRef.set(ItemInHandRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY);
+            localRef.set(FirstPersonHandsAndItemsRenderer.HandRenderSelection.RENDER_MAIN_HAND_ONLY);
         } else if (finalShouldRenderOffHand) {
-            localRef.set(ItemInHandRenderer.HandRenderSelection.RENDER_OFF_HAND_ONLY);
+            localRef.set(FirstPersonHandsAndItemsRenderer.HandRenderSelection.RENDER_OFF_HAND_ONLY);
         }
     }
 
@@ -53,7 +53,7 @@ public class ItemInHandRendererMixin {
             at = @At(
                     value = "INVOKE",
                     // signature omitted on purpose: the 26.2 descriptor is not verified, Mixin matches by name
-					target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;submitArmWithItem"
+					target = "Lnet/minecraft/client/renderer/FirstPersonHandsAndItemsRenderer;submitArmWithItem"
             )
     )
     private void possessive$replaceItemToRender(Args args){

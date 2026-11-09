@@ -22,7 +22,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.level.storage.TagValueOutput;
 import net.xolt.freecam.Freecam;
-import org.lwjgl.glfw.GLFW;
 
 public class PossessiveKeyMappings {
     private static KeyMapping possessKeyMapping;
@@ -37,24 +36,24 @@ public class PossessiveKeyMappings {
     public static void registerModKeyMappings() {
         possessKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.possess", // The translation key of the keybinding's name
-                InputConstants.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-                GLFW.GLFW_KEY_R, // The keycode of the key
+                InputConstants.Type.KEYBOARD, // The type of the keybinding, KEYBOARD for keyboard, MOUSE for mouse.
+                InputConstants.KEY_R, // The keycode of the key
                 posessiveCategory // The translation key of the keybinding's category.
         ));
         ClientTickEvents.END_CLIENT_TICK.register(PossessiveKeyMappings::possessKeyPress);
 
         savePoseKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.save_pose",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_LEFT_BRACKET,
+                InputConstants.Type.KEYBOARD,
+                InputConstants.KEY_LBRACKET,
                 posessiveCategory
         ));
         ClientTickEvents.END_CLIENT_TICK.register(PossessiveKeyMappings::savePoseKeyPress);
 
         loadPoseKeyMapping = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.possessive.load_pose",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_RIGHT_BRACKET,
+                InputConstants.Type.KEYBOARD,
+                InputConstants.KEY_RBRACKET,
                 posessiveCategory
         ));
         ClientTickEvents.END_CLIENT_TICK.register(PossessiveKeyMappings::loadPoseKeyPress);
