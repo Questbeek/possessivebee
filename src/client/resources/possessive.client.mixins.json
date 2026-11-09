@@ -9,7 +9,7 @@
     "GameRendererMixin",
     "GuiMixin",
     "GuiScreenMixin",
-    "ItemInHandRendererMixin",
+    "FirstPersonHandsAndItemsRendererMixin",
     "LevelExtractorMixin",
     "LevelRendererMixin",
     "LocalPlayerAccessor",
