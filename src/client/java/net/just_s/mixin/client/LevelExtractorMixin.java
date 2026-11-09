@@ -49,13 +49,13 @@ public abstract class LevelExtractorMixin {
             method = "extractVisibleEntities",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/extract/LevelExtractor;isEntityVisible(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/culling/Frustum;DDD)Z"
+                    target = "Lnet/minecraft/client/renderer/extract/LevelExtractor;isEntityVisible(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/culling/Frustum;DDDFJ)Z"
             )
     )
-    private boolean possessive$onRenderEntity(LevelExtractor instance, Entity entity, Frustum frustum, double d, double e, double f, Operation<Boolean> original) {
+    private boolean possessive$onRenderEntity(LevelExtractor instance, Entity entity, Frustum frustum, double d, double e, double f, float partialTicks, long chunkFadeDuration, Operation<Boolean> original) {
         if (PossessiveModClient.cameraHandler.isEnabled()) {
             return PossessiveModClient.cameraHandler.getCamera().shouldRenderEntity(entity);
         }
-        return original.call(instance, entity, frustum, d, e, f);
+        return original.call(instance, entity, frustum, d, e, f, partialTicks, chunkFadeDuration);
     }
 }

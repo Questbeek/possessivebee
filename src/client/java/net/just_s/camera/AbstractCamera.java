@@ -196,8 +196,8 @@ public abstract class AbstractCamera extends LocalPlayer {
      * for your shader.
      * For examples see assets/post_shader/astral.json
      */
-    public void onCameraShader(PostChain instance, FrameGraphBuilder frameGraphBuilder, int width, int height, PostChain.TargetBundle targetBundle) {
-        instance.addToFrame(frameGraphBuilder, width, height, targetBundle);
+    // Called once per frame right before the frame graph is executed; cameras can add their post effect here.
+    public void onCameraShader(FrameGraphBuilder frameGraphBuilder, int width, int height, PostChain.TargetBundle targetBundle) {
     }
 
     // copied from PlayerRenderer.renderHand()

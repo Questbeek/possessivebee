@@ -147,7 +147,7 @@ public class AstralProjectionCamera extends AbstractCamera {
     }
 
     @Override
-    public void onCameraShader(PostChain instance, FrameGraphBuilder frameGraphBuilder, int width, int height, PostChain.TargetBundle targetBundle) {
+    public void onCameraShader(FrameGraphBuilder frameGraphBuilder, int width, int height, PostChain.TargetBundle targetBundle) {
         PostChain astralShader = Minecraft.getInstance().getShaderManager().getPostChain(
                 Identifier.fromNamespaceAndPath(
                         PossessiveModClient.MOD_ID, "astral"
